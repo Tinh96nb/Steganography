@@ -1,0 +1,130 @@
+<html>
+<head>
+  <title>Steganography 3-LSB</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1>Steganography 3-LSB</h1>
+    </div>
+    <div class="panel-body">
+      <ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
+        <li role="presentation" class="active"> <a href="#encode" data-toggle="tab">Mã hóa</a></li>
+        <li role="presentation"> <a href="#decode" data-toggle="tab">Giải mã</a></li>
+      </ul>
+
+      <div id="my-tab-content" class="tab-content">
+        <!-- tab one -->
+        <div class="tab-pane active" id="encode">
+          <div>
+            <h2></h2>
+            <p class="alert alert-warning">
+              - Chọn ảnh phủ
+              <br> - Nhập đoạn thông điệp cần giấu
+              <br> - Nhập khóa thứ nhất <b>X</b> thập phân thỏa mãn <b>0 < X < 1 </b>
+              <br> - Nhập khóa thứ hai <b>μ</b> thỏa mãn <b>3.57 < μ ≤4 </b>
+              <br><b>- Mã hóa </b>
+            </p>
+            <form class="form">
+              <div class="form-group">
+                <label class="control-label">Chọn File ảnh phủ</label>
+                <input class="form-control" type="file" name="baseFile" onchange="previewEncodeImage()">
+              </div>
+
+              <div class="form-group">
+                <label class="control-label"> Tông điệp cần giấu</label>
+                <textarea class="form-control message" rows="3" placeholder="Thông điệp cần giấu"></textarea>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label class="control-label"> Nhập khóa <b>X</b></label>
+                  <input class="form-control x-input" type="text" value="0.675">
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"> Nhập khóa <b>μ</b></label>
+                  <input class="form-control u-input" type="text" value="3.9762">
+                </div>
+              </div>
+              
+              <div class="form-group text-center">
+                <button class="encode btn btn-primary btn-lg" onclick="encodeMessage()">Mã hóa</button>
+              </div>
+            </form>
+           <!--  <div class="clearfix"></div> -->
+          </div>
+          <div class="binary" style="display: none;">
+            <h3>Thông điệp dạng mã nhị phân</h3>
+            <textarea class="form-control message" style="word-wrap:break-word;">
+            </textarea>
+          </div>
+          <div class="images" style="display: none;">
+            <div class="row">
+              <div class="original col-md-6" style="display: none;">
+                <h3>Ảnh gốc</h3>
+                <canvas></canvas>
+              </div>
+              <div class="nulled" style="display: none;">
+                <h3>Normalized</h3>
+                <canvas></canvas>
+              </div>
+              <div class="message col-md-6" style="display: none;">
+                <h3>Ảnh đã giấu tin</h3>
+                <canvas></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- tab two -->
+        <div class="tab-pane" id="decode">
+            <p class="alert alert-warning">
+              - Chọn ảnh đã được giấu thông điệp bí mật
+              <br> - Nhập khóa thứ nhất <b>X</b> thập phân thỏa mãn <b>0 < X < 1 </b>
+              <br> - Nhập khóa thứ hai <b>μ</b> thỏa mãn <b>3.57 < μ ≤4 </b>
+              <br>
+              - <b>Giải mã</b>
+            </p>
+            <form class="form">
+              <div class="form-group">
+                <input class="form-control" type="file" name="decodeFile" onchange="previewDecodeImage()">
+              </div>
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label class="control-label"> Nhập khóa <b>X</b></label>
+                  <input class="form-control x-output" type="text" value="0.675">
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"> Nhập khóa <b>μ</b></label>
+                  <input class="form-control u-output" type="text" value="3.9762">
+                </div>
+              </div>
+              <div class="form-group text-center">
+                <button class="decode btn btn-primary btn-lg" onclick="decodeMessage()">Giải mã</button>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="decode col-md-6" style="display: none;">
+              <h3>Ảnh chứa thông điệp bí mật</h3>
+              <canvas></canvas>
+            </div>
+            <div class="binary-decode col-md-6" style="display: none;">
+              <h3>Thông điệp được giấu</h3>
+              <textarea class="form-control message" style="word-wrap:break-word;">
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 20px; margin-bottom: 10px;">Phạm Đức Tính</footer>
+  </div>
+
+  <script src="jquery.js"></script>
+  <script src="bootstrap.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
